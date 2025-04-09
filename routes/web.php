@@ -1,22 +1,54 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\ObatController;
+use App\Models\Periksa;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard',[DashboardController::class, 'index']);
+Route::get('/tables', [DashboardController::class, 'tables']);
 
-Route::get('/login', [Dashboardcontroller::class, 'auth']);
-Route::get('/register', [Dashboardcontroller::class, 'register']);
-Route::get('/dokter', [Dashboardcontroller::class, 'dokter']);
-Route::get('/periksa', [Dashboardcontroller::class, 'periksa']);
-Route::get('/obat', [Dashboardcontroller::class, 'obat']);
-Route::get('/pasien', [Dashboardcontroller::class, 'pasien']);
-Route::get('/riwayat', [Dashboardcontroller::class, 'riwayat']);
-Route::get('/periksaa', [Dashboardcontroller::class, 'periksaa']);
 
+/* --------------- Guest bisa login dan register --------------- */
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
+
+/* --------------- Pasien bisa ke halaman dashboard, periksa, dan riwayat --------------- */
+Route::get('/pasien', function () {
+    return view('pasien.dashboard');
+})->name('pasien.dashboard');
+
+Route::get('/pasien/periksa', function () {
+    return view('pasien.periksa');
+})->name('pasien.periksa');
+
+Route::get('/pasien/riwayat', function () {
+    return view('pasien.riwayat');
+})->name('pasien.riwayat');
+
+
+/* --------------- Dokter bisa ke halaman dashboard, memeriksa pasien, dan obat --------------- */
+Route::get('/dokter', function () {
+    return view('dokter.dashboard');
+})->name('dokter.dashboard');
+
+Route::get('/dokter/periksa', function () {
+    $periksas = Periksa::all();
+    return view('dokter.periksa', compact('periksas'));
+})->name('dokter.periksa');
+
+
+Route::get('/dokter/obat', [ObatController::class , 'index'])->name('dokter.obat');
+Route::post('/dokter/obat', [ObatController::class, 'store'])->name('dokter.obat.store');
+Route::get('/dokter/obat/{id}', [ObatController::class, 'edit'])->name('dokter.obat.edit');
+Route::put('/dokter/obat/{id}', [ObatController::class, 'update'])->name('dokter.obat.update');
+Route::delete('/dokter/obat/{id}', [ObatController::class, 'delete'])->name('dokter.obat.delete');
