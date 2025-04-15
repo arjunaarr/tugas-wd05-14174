@@ -97,8 +97,8 @@
                                     <td>{{ $obat->kemasan}}</td>
                                     <td>{{ $obat->harga}}</td>
                                     <td class="d-flex">
-                                        <button type="button" class="btn btn-warning mr-2">Edit</button>
                                         <!-- Form Hapus -->
+                                        <a href="{{ route('dokter.obat.edit', $obat->id) }}" type="button" class="btn btn-warning mr-2">Edit</a>
                                         <form action="{{ route('dokter.obat.delete', $obat->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
