@@ -15,7 +15,5 @@ class DashboardController extends Controller
         return view('tables.index');
     }
 
-    // fungsi
-    // - menampilkan view tampilan
-    // - crud database ( fungsi insert, read, update, delete )
+
 }

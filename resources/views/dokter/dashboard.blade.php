@@ -7,7 +7,7 @@
             <!-- Add icons to the links using the .nav-icon class
                                                                    with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{ route('dokter.dashboard') }}" class="nav-link active">
+                <a href="{{ route('dokter.dashboard') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dokter.obat') }}" class="nav-link ">
+                <a href="{{ route('dokter.obat') }}" class="nav-link active">
                     <p>
                         Obat
                     </p>
