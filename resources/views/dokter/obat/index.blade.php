@@ -41,7 +41,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Periksa</h3>
+                        <h3 class="card-title">Manajemen Obat</h3>
                     </div>
                     <form method="POST" action="{{ route('dokter.obat.store') }}">
                         @csrf

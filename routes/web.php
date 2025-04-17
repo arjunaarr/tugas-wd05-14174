@@ -5,12 +5,17 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ObatController;
 use App\Models\Periksa;
-/* --------------- Halaman Awal --------------- */
+
+/* =========================
+   1. Landing Page
+========================= */
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
-/* --------------- Login & Register --------------- */
+/* =========================
+   2. Login & Register
+========================= */
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -19,40 +24,40 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-/* --------------- Setelah Login (Dibatasi auth) --------------- */
-Route::middleware('auth')->group(function () {
+/* =========================
+   3. Setelah Login - Semua pengguna
+   Middleware: auth
+========================= */
+Route::middleware(['auth'])->group(function () {
 
-    // Dashboard umum (bisa kamu kembangkan lagi)
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/tables', [DashboardController::class, 'tables']);
 
-    /* --------- Pasien --------- */
-    Route::get('/pasien', function () {
-        return view('pasien.dashboard');
-    })->name('pasien.dashboard');
+    /* =========================
+       4. Route Pasien
+       Middleware: role:pasien
+    ========================= */
+    Route::middleware('role:pasien')->prefix('pasien')->group(function () {
+        Route::get('/', fn () => view('pasien.dashboard'))->name('pasien.dashboard');
+        Route::get('/periksa', fn () => view('pasien.periksa'))->name('pasien.periksa');
+        Route::get('/riwayat', fn () => view('pasien.riwayat'))->name('pasien.riwayat');
+    });
 
-    Route::get('/pasien/periksa', function () {
-        return view('pasien.periksa');
-    })->name('pasien.periksa');
+    /* =========================
+       5. Route Dokter
+       Middleware: role:dokter
+    ========================= */
+    Route::middleware('role:dokter')->prefix('dokter')->group(function () {
+        Route::get('/', fn () => view('dokter.dashboard'))->name('dokter.dashboard');
+        Route::get('/periksa', function () {
+            $periksas = Periksa::all();
+            return view('dokter.periksa', compact('periksas'));
+        })->name('dokter.periksa');
 
-    Route::get('/pasien/riwayat', function () {
-        return view('pasien.riwayat');
-    })->name('pasien.riwayat');
-
-  /* --------- Dokter --------- */
-
-    Route::get('/dokter', function () {
-        return view('dokter.dashboard'); // ini akan arahkan ke blade
-    })->middleware('auth')->name('dokter.dashboard');
-
-    Route::get('/dokter/periksa', function () {
-        $periksas = Periksa::all();
-        return view('dokter.periksa', compact('periksas'));
-    })->name('dokter.periksa');
-
-    Route::get('/dokter/obat', [ObatController::class , 'index'])->name('dokter.obat');
-    Route::post('/dokter/obat', [ObatController::class, 'store'])->name('dokter.obat.store');
-    Route::get('/dokter/obat/{id}', [ObatController::class, 'edit'])->name('dokter.obat.edit');
-    Route::put('/dokter/obat/{id}', [ObatController::class, 'update'])->name('dokter.obat.update');
-    Route::delete('/dokter/obat/{id}', [ObatController::class, 'delete'])->name('dokter.obat.delete');
+        Route::get('/obat', [ObatController::class , 'index'])->name('dokter.obat');
+        Route::post('/obat', [ObatController::class, 'store'])->name('dokter.obat.store');
+        Route::get('/obat/{id}', [ObatController::class, 'edit'])->name('dokter.obat.edit');
+        Route::put('/obat/{id}', [ObatController::class, 'update'])->name('dokter.obat.update');
+        Route::delete('/obat/{id}', [ObatController::class, 'delete'])->name('dokter.obat.delete');
+    });
 });
