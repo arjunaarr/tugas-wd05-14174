@@ -78,7 +78,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $periksa->id }}</td>
                                                     <td>{{ $periksa->dokter->nama }}</td>
-                                                    <td>{{ $periksa->tgl_periksa ?? '-' }}</td>
+                                                    <td>{{ $periksa->tgl_periksa ? date('d/m/Y', strtotime($periksa->tgl_periksa)) : '-' }}</td>
                                                     <td>{{ $periksa->catatan ?? '-' }}</td>
                                                     <td>
                                                         @if(count($periksa->detailPeriksa) > 0)
