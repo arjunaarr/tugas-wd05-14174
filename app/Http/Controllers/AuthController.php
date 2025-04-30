@@ -49,18 +49,18 @@ class AuthController extends Controller
             'no_hp' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
-            'role' => 'required|in:dokter,pasien',
+            // Hapus validasi role karena tidak dibutuhkan dari input
         ]);
-
+    
         User::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => 'pasien', // Hardcode nilai role di sini
             'password' => Hash::make($request->password),
         ]);
-
+    
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 

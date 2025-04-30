@@ -71,16 +71,6 @@
             <div class="input-group-text"><span class="fas fa-lock"></span></div>
           </div>
         </div>
-
-        {{-- Pilih Role: dokter / pasien --}}
-        <div class="mb-3">
-          <select name="role" placeholder="Pilih Role" class="form-control" required>
-            <option value="">Pilih Role</option>
-            <option value="dokter">Dokter</option>
-            <option value="pasien">Pasien</option>
-          </select>
-        </div>
-
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
