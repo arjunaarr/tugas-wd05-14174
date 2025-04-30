@@ -22,7 +22,7 @@ test
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+    <a href="#" class="h1"><b>KLINIK</b>APP</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -62,10 +62,10 @@ test
         </div>
       </form>
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="forgot-password.html">lupa password?</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="register" class="text-center">sudah punya akun?</a>
       </p>
     </div>
     <!-- /.card-body -->
