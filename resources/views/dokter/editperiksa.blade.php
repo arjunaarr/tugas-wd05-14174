@@ -60,9 +60,10 @@
                             <div class="form-group">
                                 <label for="status">Status Pemeriksaan</label>
                                 <select name="status" id="status" class="form-control" required>
-                                    <option value="menunggu" {{ (old('status', $periksa->status) == 'menunggu') ? 'selected' : '' }}>Menunggu</option>
-                                    <option value="dalam proses" {{ (old('status', $periksa->status) == 'dalam proses') ? 'selected' : '' }}>Dalam Proses</option>
-                                    <option value="selesai" {{ (old('status', $periksa->status) == 'selesai') ? 'selected' : '' }}>Selesai</option>
+                                    <option value="Menunggu" {{ (old('status', $periksa->status) == 'Menunggu') ? 'selected' : '' }}>Menunggu</option>
+                                    <option value="Dalam Proses" {{ (old('status', $periksa->status) == 'Dalam Proses') ? 'selected' : '' }}>Dalam Proses</option>
+                                    <option value="Selesai" {{ (old('status', $periksa->status) == 'Selesai') ? 'selected' : '' }}>Selesai</option>
+                                    <option value="Batal" {{ (old('status', $periksa->status) == 'Batal') ? 'selected' : '' }}>Batal</option>
                                 </select>
                                 @error('status')
                                     <span class="text-danger">{{ $message }}</span>
@@ -109,7 +110,7 @@
                         <input type="text" id="total_keseluruhan" class="form-control" value="Rp0" readonly>
                     </div>
                     <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Simpan Pemeriksaan</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             <a href="{{ route('dokter.memeriksa') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </form>
