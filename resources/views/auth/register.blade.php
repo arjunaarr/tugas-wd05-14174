@@ -60,17 +60,13 @@
           @enderror
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="ktp" class="form-control @error('ktp') is-invalid @enderror" 
-            placeholder="Nomor KTP" value="{{ old('ktp') }}" required>
+          <input type="text" name="no_ktp" class="form-control @error('no_ktp') is-invalid @enderror" 
+            placeholder="Nomor KTP" value="{{ old('no_ktp') }}" required>
           <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-id-card"></span>
-            </div>
+            <div class="input-group-text"><span class="fas fa-id-card"></span></div>
           </div>
-          @error('ktp')
-            <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-            </span>
+          @error('no_ktp')
+            <span class="invalid-feedback">{{ $message }}</span>
           @enderror
         </div>
         <div class="input-group mb-3">
@@ -111,22 +107,19 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
-          <input type="text" name="no_ktp" class="form-control @error('no_ktp') is-invalid @enderror" 
-            placeholder="Nomor KTP" value="{{ old('no_ktp') }}" required>
-          <div class="input-group-append">
-            <div class="input-group-text"><span class="fas fa-id-card"></span></div>
-          </div>
-          @error('no_ktp')
-            <span class="invalid-feedback">{{ $message }}</span>
-          @enderror
-        </div>
-
-
-
-
-
         
+
+        <div class="form-group">
+            <label for="no_hp">
+                <i class="fas fa-phone mr-1"></i>
+                  Nomor HP
+                  </label>
+                  <input type="text" class="form-control @error('no_hp') is-invalid @enderror" 
+                  id="no_hp" name="no_hp" value="{{ old('no_hp') }}" required>
+                   @error('no_hp')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                   @enderror
+                  </div>
          <div class="form-group">
           <label for="alamat">
           <i class="fas fa-map-marker-alt mr-1"></i>
