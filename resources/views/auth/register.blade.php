@@ -122,6 +122,23 @@
           @enderror
         </div>
 
+
+
+
+
+        
+         <div class="form-group">
+          <label for="alamat">
+          <i class="fas fa-map-marker-alt mr-1"></i>
+            Alamat
+          </label>
+          <textarea class="form-control @error('alamat') is-invalid @enderror" 
+          id="alamat" name="alamat" rows="3" required>{{ old('alamat') }}</textarea>
+          @error('alamat')
+          <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
+            </div>
+
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

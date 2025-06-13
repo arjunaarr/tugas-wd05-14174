@@ -34,7 +34,7 @@
                 @forelse($polis as $poli)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $poli->nama }}</td>
+                        <td>{{ $poli->nama_poli }}</td>
                         <td>{{ $poli->keterangan }}</td>
                         <td>
                             <a href="{{ route('admin.poli.edit', $poli->id) }}" class="btn btn-warning btn-sm">
