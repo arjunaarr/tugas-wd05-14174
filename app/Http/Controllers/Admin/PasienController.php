@@ -51,6 +51,7 @@ class PasienController extends Controller
             Pasien::create([
                 'no_rm' => $noRM,
                 'nama' => $request->nama,
+                'email' => $request->email,
                 'no_ktp' => $request->no_ktp,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
@@ -71,27 +72,46 @@ class PasienController extends Controller
     }
 
     public function update(Request $request, Pasien $pasien)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'no_ktp' => 'required|string|unique:pasiens,no_ktp,' . $pasien->id,
-            'alamat' => 'required|string',
-            'no_hp' => 'required|string',
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'no_ktp' => 'required|string|unique:pasiens,no_ktp,' . $pasien->id,
+        'alamat' => 'required|string',
+        'no_hp' => 'required|string',
+        'password' => 'nullable|string|min:8',
+    ]);
+
+    try {
+        DB::beginTransaction();
+
+        // Update data pasien
+        $pasien->update([
+            'nama' => $request->nama,
+            'no_ktp' => $request->no_ktp,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
         ]);
 
-        try {
-            $pasien->update([
-                'nama' => $request->nama,
-                'no_ktp' => $request->no_ktp,
-                'alamat' => $request->alamat,
-                'no_hp' => $request->no_hp,
-            ]);
+        // Update user terkait
+        if ($pasien->user) {
+            $pasien->user->name = $request->nama;
 
-            return redirect()->route('admin.pasien.index')->with('success', 'Data pasien berhasil diperbarui');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+            // Update password jika diisi
+            if ($request->filled('password')) {
+                $pasien->user->password = Hash::make($request->password);
+            }
+
+            $pasien->user->save();
         }
+
+        DB::commit();
+
+        return redirect()->route('admin.pasien.index')->with('success', 'Data pasien berhasil diperbarui');
+    } catch (\Exception $e) {
+        DB::rollback();
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
     }
+}
 
     public function destroy(Pasien $pasien)
     {

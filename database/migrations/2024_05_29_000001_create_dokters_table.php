@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('alamat');
             $table->string('no_hp');
+            $table->string('nama_poli');
             $table->foreignId('poli_id')->constrained('polis')->onDelete('cascade');
             $table->timestamps();
         });

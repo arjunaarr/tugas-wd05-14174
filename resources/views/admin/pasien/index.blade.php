@@ -38,7 +38,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pasien->nama }}</td>
                         <td>{{ $pasien->email }}</td>
-                        <td>{{ $pasien->ktp }}</td>
+                        <td>{{ $pasien->no_ktp }}</td>
                         <td>
                             <a href="{{ route('admin.pasien.edit', $pasien->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i>

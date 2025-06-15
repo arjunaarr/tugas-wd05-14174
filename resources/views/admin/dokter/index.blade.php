@@ -27,7 +27,7 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Poli</th>
+                    <th>Nama Poli</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -37,7 +37,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $dokter->nama }}</td>
                         <td>{{ $dokter->email }}</td>
-                        <td>{{ $dokter->poli->nama }}</td>
+                        <td>{{ $dokter->nama_poli }}</td>
                         <td>
                             <a href="{{ route('admin.dokter.edit', $dokter->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i>

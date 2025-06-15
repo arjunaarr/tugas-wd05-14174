@@ -44,16 +44,20 @@ class DatabaseSeeder extends Seeder
         // Buat data Dokter
         Dokter::create([
             'nama' => 'Dr. Gigi',
+            'email' => 'gigi@gmail.com',
             'alamat' => 'Jl. Gigi No. 1',
             'no_hp' => '08123456789',
+            'nama_poli' => 'Poli gigi', 
             'poli_id' => $poliGigi->id,
             'user_id' => $dokterGigi->id
         ]);
 
         Dokter::create([
             'nama' => 'Dr. Umum',
+            'email' => 'umum@gmail.com',
             'alamat' => 'Jl. Umum No. 1',
             'no_hp' => '08987654321',
+            'nama_poli' => 'Poli Umum', 
             'poli_id' => $poliUmum->id,
             'user_id' => $dokterUmum->id
         ]);
