@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_periksa');
             $table->unsignedBigInteger('id_obat');
+            $table->integer('jumlah')->default(1);
             $table->timestamps();
 
             $table->foreign('id_periksa')->references('id')->on('periksa')->onDelete('cascade');
