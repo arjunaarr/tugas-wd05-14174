@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ObatController as AdminObatController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
 use App\Http\Controllers\Dokter\RiwayatPasienController;
+use App\Http\Controllers\Dokter\ProfilController;
 
 Route::middleware(['web'])->group(function () {
     /* Halaman Awal */
@@ -51,6 +52,10 @@ Route::middleware(['web'])->group(function () {
             // Tambahkan route untuk riwayat pasien
             Route::get('/dokter/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('dokter.riwayat-pasien');
             Route::get('/dokter/riwayat-pasien/{id}', [RiwayatPasienController::class, 'detail'])->name('dokter.riwayat-pasien.detail');
+
+            // Profil Dokter
+            Route::get('/dokter/profil', [ProfilController::class, 'index'])->name('dokter.profil');
+            Route::put('/dokter/profil', [ProfilController::class, 'update'])->name('dokter.profil.update');
 
             // Jadwal Periksa
             Route::resource('dokter/jadwal-periksa', JadwalPeriksaController::class)->names([

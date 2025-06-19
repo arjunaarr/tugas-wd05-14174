@@ -23,6 +23,12 @@
             <p>Jadwal Periksa</p>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="{{ route('dokter.profil') }}" class="nav-link {{ Request::is('dokter/profil*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user-md"></i>
+            <p>Profil</p>
+        </a>
+    </li>
 @endif 
 @if(auth()->user()->role === 'admin')
 <li class="nav-item">
